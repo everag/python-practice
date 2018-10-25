@@ -1,4 +1,7 @@
 class Node:
+    value = None
+    next = None
+
     def __init__(self, value):
         self.value = value
         self.next = None
@@ -14,10 +17,14 @@ class Node:
 
 
 class LinkedList:
+    head = None
+    tail = None
+    size = 0
+
     def __init__(self, value):
         self.head = Node(value)
         self.tail = self.head
-        self.size = 1
+        self.size += 1
 
     def add(self, value):
         new_tail = Node(value)

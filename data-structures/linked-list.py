@@ -41,24 +41,27 @@ class LinkedList:
     def insert(self, value, index):
         if (index + 1) is self.size:
             self.add(value)
-        elif (index + 1) > self.size:
-            raise IndexError
-        else:
-            curr_nth = self.head.nth(index)
-            new_nth = Node(value)
-            new_nth.next = curr_nth
-            self.size += 1
-
+        elif (index + 1) < self.size:
             if index > 0:
                 prev = self.head.nth(index - 1)
+                curr_nth = prev.next
+            else:
+                curr_nth = self.head.nth(index)
+
+            new_nth = Node(value)
+            new_nth.next = curr_nth
+
+            if index > 0:
                 prev.next = new_nth
             else:
                 self.head = new_nth
 
-    def delete(self, index):
-        if (index + 1) > self.size:
-            raise IndexError
+            self.size += 1
         else:
+            raise IndexError
+
+    def delete(self, index):
+        if (index + 1) <= self.size:
             if index is 0:
                 if self.size is 1:
                     self.head = None
@@ -68,23 +71,26 @@ class LinkedList:
             else:
                 prev_nth = self.head.nth(index - 1)
                 if (index + 1) < self.size:
-                    prev_nth.next = self.head.nth(index).next
+                    prev_nth.next = prev_nth.next.next
                 else:
                     prev_nth.next = None
                     self.tail = prev_nth
 
             self.size -= 1
+        else:
+            raise IndexError
 
 
-def show(arg):
-    if isinstance(arg, LinkedList):
-        show(arg.head)
-    elif isinstance(arg, Node):
-        print(arg.value, end=' ')
-        if arg.next is not None:
-            show(arg.next)
-    else:
-        raise TypeError("Param 1 must be a LinkedList or a Node")
+def print_list(arg):
+    print('[size={0}]'.format(arg.size), end=' ')
+    print_node(arg.head)
+    print()
+
+
+def print_node(arg):
+    print(arg.value, end=' ')
+    if arg.next is not None:
+        print_node(arg.next)
 
 
 lst = LinkedList(1)
@@ -106,8 +112,7 @@ lst.insert(7, 0)
 lst.insert(9, 7)
 # 7 6 0 6 5 1 2 3 9
 
-show(lst)
-print()
+print_list(lst)
 
 lst.delete(0)
 # 6 0 6 5 1 2 3 9
@@ -120,4 +125,4 @@ lst.delete(1)
 lst.delete(4)
 # 0 1 2 3
 
-show(lst)
+print_list(lst)

@@ -6,6 +6,12 @@ class Node:
         self.value = value
         self.next = None
 
+    def __str__(self):
+        node_str = str(self.value)
+        if self.next is not None:
+            node_str += ' ' + self.next.__str__()
+        return node_str
+
     def nth(self, index):
         if index is 0:
             return self
@@ -25,6 +31,9 @@ class LinkedList:
         self.head = Node(value)
         self.tail = self.head
         self.size += 1
+
+    def __str__(self):
+        return self.head.__str__()
 
     def add(self, value):
         new_tail = Node(value)
@@ -81,48 +90,48 @@ class LinkedList:
             raise IndexError
 
 
-def print_list(arg):
-    print('[size={0}]'.format(arg.size), end=' ')
-    print_node(arg.head)
-    print()
-
-
-def print_node(arg):
-    print(arg.value, end=' ')
-    if arg.next is not None:
-        print_node(arg.next)
-
-
 lst = LinkedList(1)
-# 1
+assert lst.__str__() == '1'
+
 lst.add(2)
-# 1 2
+assert lst.__str__() == '1 2'
+
 lst.add(3)
-# 1 2 3
+assert lst.__str__() == '1 2 3'
+
 lst.prepend(0)
-# 0 1 2 3
+assert lst.__str__() == '0 1 2 3'
+
 lst.insert(5, 1)
-# 0 5 1 2 3
+assert lst.__str__() == '0 5 1 2 3'
+
 lst.insert(6, 1)
-# 0 6 5 1 2 3
+assert lst.__str__() == '0 6 5 1 2 3'
+
 lst.insert(6, 0)
-# 6 0 6 5 1 2 3
+assert lst.__str__() == '6 0 6 5 1 2 3'
+
 lst.insert(7, 0)
-# 7 6 0 6 5 1 2 3
+assert lst.__str__() == '7 6 0 6 5 1 2 3'
+
 lst.insert(9, 7)
-# 7 6 0 6 5 1 2 3 9
+assert lst.__str__() == '7 6 0 6 5 1 2 3 9'
 
-print_list(lst)
+print(lst)
 
 lst.delete(0)
-# 6 0 6 5 1 2 3 9
+assert lst.__str__() == '6 0 6 5 1 2 3 9'
+
 lst.delete(0)
-# 0 6 5 1 2 3 9
+assert lst.__str__() == '0 6 5 1 2 3 9'
+
 lst.delete(1)
-# 0 5 1 2 3 9
+assert lst.__str__() == '0 5 1 2 3 9'
+
 lst.delete(1)
-# 0 1 2 3 9
+assert lst.__str__() == '0 1 2 3 9'
+
 lst.delete(4)
-# 0 1 2 3
+assert lst.__str__() == '0 1 2 3'
 
-print_list(lst)
+print(lst)

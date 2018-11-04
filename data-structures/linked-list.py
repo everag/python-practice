@@ -99,6 +99,7 @@ class LinkedList:
             raise IndexError
 
     def reverse(self):
+        self.tail = self.head
         self.head = self.head.reverse()
 
 
@@ -150,6 +151,8 @@ print(lst)
 
 lst.reverse()
 assert lst.__str__() == '3 2 1 0'
+assert lst.head.value == 3
+assert lst.tail.value == 0
 assert lst.size == 4
 
 print(lst)

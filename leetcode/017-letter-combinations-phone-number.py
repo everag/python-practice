@@ -1,23 +1,27 @@
 # https://leetcode.com/problems/letter-combinations-of-a-phone-number/description/
 
+# DFS (depth first search) solution
+
 
 class Solution:
     lettermap = {
-        '2': 'abc',
-        '3': 'def',
-        '4': 'ghi',
-        '5': 'jkl',
-        '6': 'mno',
-        '7': 'pqrs',
-        '8': 'tuv',
-        '9': 'wxyz'
+        '2': [97, 3],
+        '3': [100, 3],
+        '4': [103, 3],
+        '5': [106, 3],
+        '6': [109, 3],
+        '7': [112, 4],
+        '8': [116, 3],
+        '9': [119, 4]
     }
 
     def letterCombinations(self, digits):
         return self.dig(0, digits, '', []) if len(digits) > 0 else []
 
     def dig(self, index, digits, combo, result):
-        for letter in self.lettermap[digits[index]]:
+        digit_info = self.lettermap[digits[index]]
+        for charcode in range(digit_info[0], digit_info[0] + digit_info[1]):
+            letter = chr(charcode)
             if index+1 == len(digits):
                 result.append(combo+letter)
             else:
@@ -30,4 +34,4 @@ res = sol.letterCombinations('23')
 print(res)
 assert res == ["ad", "ae", "af", "bd", "be", "bf", "cd", "ce", "cf"]
 
-# 60ms = Acceptable but not great... need to try again
+# 52ms = Acceptable but not great... still need improvement!

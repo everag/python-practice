@@ -2,3 +2,4 @@
 .DS_Store
 /venv
 sandbox.py
+__pycache__

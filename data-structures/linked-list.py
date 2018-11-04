@@ -21,6 +21,15 @@ class Node:
         else:
             raise IndexError
 
+    def reverse(self, parent=None):
+        if self.next is not None:
+            old_next = self.next
+            self.next = parent
+            return old_next.reverse(self)
+        else:
+            self.next = parent
+            return self
+
 
 class LinkedList:
     head = None
@@ -89,6 +98,9 @@ class LinkedList:
         else:
             raise IndexError
 
+    def reverse(self):
+        self.head = self.head.reverse()
+
 
 lst = LinkedList(1)
 assert lst.__str__() == '1'
@@ -135,3 +147,19 @@ lst.delete(4)
 assert lst.__str__() == '0 1 2 3'
 
 print(lst)
+
+lst.reverse()
+assert lst.__str__() == '3 2 1 0'
+assert lst.size == 4
+
+print(lst)
+
+lst.delete(0)
+lst.delete(0)
+lst.delete(0)
+assert lst.__str__() == '0'
+
+print(lst)
+
+lst.reverse()
+assert lst.__str__() == '0'

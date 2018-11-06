@@ -25,6 +25,10 @@ class Solution(object):
         return head
 
     def visit(self, node, stack):
+        """
+        :type node: Node
+        :type stack: List
+        """
         if node.child is not None:
             if node.next is not None:
                 nxt = node.next

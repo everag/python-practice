@@ -29,14 +29,14 @@ class Solution(object):
             if node.next is not None:
                 nxt = node.next
                 nxt.prev = None
-                stack.append(nxt)
+                stack.insert(0, nxt)
             node.next = node.child
             node.next.prev = node
             node.child = None
             self.visit(node.next, stack)
         else:
             if node.next is None and len(stack) > 0:
-                node.next = stack.pop()
+                node.next = stack.pop(0)
                 node.next.prev = node
 
             if node.next is not None:
@@ -66,4 +66,4 @@ n1 = Solution().flatten(n1)
 assert n1.__str__() == '{val:1, prev:None, next:{val:2, prev:1, next:{val:4, prev:2, next:{val:5, prev:4, next:{val:7, prev:5, next:{val:6, prev:7, next:{val:3, prev:6, next:None, child:None}, child:None}, child:None}, child:None}, child:None}, child:None}, child:None}'
 
 # O(n)
-# 1176ms - Can be optimized a lot. Beats 20% submissions though
+# 1020ms - Can be optimized. Beats 40% submissions as is though

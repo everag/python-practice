@@ -5,14 +5,14 @@
 
 class Solution:
     lettermap = {
-        '2': [97, 3],
-        '3': [100, 3],
-        '4': [103, 3],
-        '5': [106, 3],
-        '6': [109, 3],
-        '7': [112, 4],
-        '8': [116, 3],
-        '9': [119, 4]
+        '2': [ord('a'), 3],
+        '3': [ord('d'), 3],
+        '4': [ord('g'), 3],
+        '5': [ord('j'), 3],
+        '6': [ord('m'), 3],
+        '7': [ord('p'), 4],
+        '8': [ord('t'), 3],
+        '9': [ord('w'), 4]
     }
 
     def letterCombinations(self, digits):
@@ -20,8 +20,8 @@ class Solution:
 
     def dig(self, index, digits, combo, result):
         digit_info = self.lettermap[digits[index]]
-        for charcode in range(digit_info[0], digit_info[0] + digit_info[1]):
-            letter = chr(charcode)
+        for char_code in range(digit_info[0], digit_info[0] + digit_info[1]):
+            letter = chr(char_code)
             if index+1 == len(digits):
                 result.append(combo+letter)
             else:
